@@ -39,6 +39,7 @@ OK，关于第三点，如果小伙伴们之前没有接触过WebSocket，或者
 
 **源码地址：[https://github.com/lenve/GobangGame](https://github.com/lenve/GobangGame)**
 
+**博客地址：[WebSocket刨根问底(四)之五子棋大战江湖](http://blog.csdn.net/u012702547/article/details/77715369)**
 
 欢迎小伙伴们fork，star。
 
