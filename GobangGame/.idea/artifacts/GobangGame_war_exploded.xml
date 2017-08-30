@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="GobangGame:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/GobangGame_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="GobangGame" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="D:/Program/Apache Software Foundation/apache-tomcat-8.5.12-windows-x64/apache-tomcat-8.5.12/lib/websocket-api.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="GobangGame/web/Web" />
+    </root>
+  </artifact>
+</component>

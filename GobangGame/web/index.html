@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>五子棋大战</title>
+    <script src="jquery-3.2.1.js"></script>
+    <style>
+        tr {
+            height: 40px;
+        }
+
+        td {
+            width: 39px;
+        }
+
+        table {
+            /*border-right: 1px solid #010000;*/
+            /*border-bottom: 1px solid #010000;*/
+        }
+
+        table td {
+            border-left: 1px solid #010000;
+            border-top: 1px solid #010000
+        }
+
+        table tr:nth-last-child(1) td {
+            border-left: 0px solid #010000;
+        }
+
+        table td:nth-last-child(1) {
+            border-top: 0px solid #010000
+        }
+
+        img {
+            width: 22px;
+            height: 22px;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <div id="msgDiv"><input type="text" id="nickname" placeholder="请输入昵称"><input type="button" value="连接" id="connBtn">
+    </div>
+    <div style="background:url('./img/bg.png') no-repeat 0px 0px;width: 1081px;height: 610px;padding-top:5px;margin-top: 15px;display: none"
+         id="gameDiv"></div>
+</div>
+<script>
+    var str = "<table cellpadding='0' cellspacing='0' id='gameTable'>";
+    for (var i = 0; i < 15; i++) {
+        str += "<tr>";
+        for (var j = 0; j < 25; j++) {
+            str += "<td></td>";
+        }
+        str += "</tr>";
+    }
+    str += "</table>";
+    $("#gameDiv").html(str);
+    var webSocket;
+    $("#connBtn").click(function () {
+        var nickname = $("#nickname").val();
+        if (nickname == null || nickname == '') {
+            alert("必须输入昵称");
+            return;
+        }
+        $("#gameDiv").css("display", "block");
+        $(this).attr("disabled", "disabled");
+        webSocket = new WebSocket("ws://192.168.13.48/game/game/" + nickname);
+        webSocket.onmessage = function (event) {
+            if(event.data=='房间人已满!'){
+                $("#msgDiv").html(event.data);
+                $("#gameDiv").css("display", "none");
+                webSocket.close(-1);
+            }
+            if(event.data.indexOf("获胜")!=-1) {
+                eval(event.data);
+            }else{
+                if (event.data.indexOf("-") != -1) {
+                    var splitArr = event.data.split("-");
+                    var x = splitArr[0];
+                    var y = splitArr[1];
+                    if (splitArr[2] == 0) {
+                        $("#gameTable tr:eq('" + y + "') td:eq('" + x + "')").html("<div style='margin-top: -30px;margin-left: -11px;'><img src='img/white.png'/></div>");
+                    } else {
+                        $("#gameTable tr:eq('" + y+ "') td:eq('" +x+ "')").html("<div style='margin-top: -30px;margin-left: -11px;'><img src='img/black.png'/></div>");
+                    }
+                } else {
+                    $("#msgDiv").html(event.data);
+                }
+            }
+        }
+        webSocket.onerror = function (event) {
+            alert(event.data);
+        }
+        webSocket.onopen = function (event) {
+            $("#msgDiv").html("<p>您已经进入到房间里</p>");
+        }
+    });
+    $("#gameDiv").click(function (event) {
+        var gameTable = $("#gameTable");
+        var rect = gameTable[0].getBoundingClientRect();
+        var clickX = event.clientX - rect.left;
+        var clickY = event.clientY - rect.top;
+        var n1 = clickX % 40;
+        var n2 = clickY % 40;
+        if (n1 > 15 && n1 < 25 || n2 > 15 && n2 < 25) {
+            return;
+        }
+        var x = (clickX - n1) / 40;
+        if (n1 >= 25) {
+            x++;
+        }
+        var y = (clickY - n2) / 40;
+        if (n2 >= 25) {
+            y++;
+        }
+        webSocket.send(x + "-" + y);
+    });
+</script>
+</body>
+</html>
