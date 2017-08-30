@@ -17,11 +17,11 @@ OK，关于第三点，如果小伙伴们之前没有接触过WebSocket，或者
 
 1.登录效果  
 
-![这里写图片描述](http://img.blog.csdn.net/20170830143417788?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjcwMjU0Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![这里写图片描述](https://user-images.githubusercontent.com/6023444/29864190-86101b9c-8da4-11e7-9f9c-b66fa1523167.gif)
 
 2.游戏进行时效果
 
-![这里写图片描述](http://img.blog.csdn.net/20170830141758200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjcwMjU0Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)  
+![这里写图片描述](https://user-images.githubusercontent.com/6023444/29864483-75c06cdc-8da5-11e7-801d-4c051006a45d.gif)  
 
 3.房间满员后，再进入，会有错误提示，如下：  
 
